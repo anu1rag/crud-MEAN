@@ -1,5 +1,5 @@
 const model = require('../../models/state');
-
+const APIError = require('../../constants/APIError');
 
 class StateService {
     constructor() {
@@ -11,8 +11,13 @@ class StateService {
     }
 
     async createState(request) {
+        let state_name = await model.findOne({state_name:request.state_name});
+        if(state_name) {
+            return APIError.DuplicateEntity;
+        }
         let count = await model.find({}).countDocuments();
         request = {...{id : count+1},...request};
+        console.log(request);
         let state = new model(request);
         let response = await state.save();
         return response;

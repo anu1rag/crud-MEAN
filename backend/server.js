@@ -26,7 +26,9 @@ app.use('/api/child',childRoute);
 app.use('/api/state', stateRoute);
 app.use('/api/district', districtRoute);
 app.use(errorHandler);
-
+app.use((req,res,next)=>{
+	res.status(404).send('Unable to find the requested resource!');
+});
 app.get('dist', (req,res)=>{
     res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html')) 
 });
