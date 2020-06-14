@@ -6,7 +6,7 @@ const StateSchema = new mongoose.Schema({
         required: true
     },
     state_name : {
-        type: Number,
+        type: String,
         required: true
     }
 });

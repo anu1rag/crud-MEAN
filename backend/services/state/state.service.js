@@ -6,25 +6,16 @@ class StateService {
     }
 
     async getState() {
-        try{
-            let data = await model.find({});
-            return data;
-        }
-        catch(err){
-            return err;
-        }
+        let data = await model.find({});
+        return data;
     }
 
     async createState(request) {
-        try{
-            let count = await model.find({}).count();
-            request = {...{state_id : count+1},...request};
-            let state = model.create(request);
-            let response = await state.save(request);
-          return response;
-        } catch(err) {
-            return err;
-        }
+        let count = await model.find({}).countDocuments();
+        request = {...{id : count+1},...request};
+        let state = new model(request);
+        let response = await state.save();
+        return response;
     }    
 }
 

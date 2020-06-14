@@ -1,10 +1,11 @@
 const express= require('express');
+const multer = require('multer');
 const router = express.Router();
 const StateController = require('../../controllers/state/state.controller');
 
 const stateController = new StateController();
-
-router.get('/get-state', stateController.getState);
-router.post('/create', stateController.createState);
+let upload = multer();
+router.get('/get-state', upload.fields([]), stateController.getState);
+router.post('/create', upload.fields([]), stateController.createState);
 
 module.exports = router;

@@ -19,7 +19,7 @@ class StateController {
 
     async createState(req,res,next) {
         try {
-            console.log(req.body);
+            req.body = JSON.parse(JSON.stringify(req.body));
             if(!utils.hasParams(req.body, ['state_name'])) {
                 throw APIError.MissingParams;
             } 

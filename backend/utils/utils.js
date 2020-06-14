@@ -1,12 +1,13 @@
 module.exports = {
     hasParams : (req, arr) =>{
-        let request_object = Object.keys(req);
-        arr.forEach((element)=>{
-            if(!request_object.includes(element)) {
-                return false;
-            }
+        let request_object = Object.keys(req)
+        console.log(request_object);
+        let value = arr.every((key)=>{
+            console.log(key);
+            console.log(request_object.includes(key));
+            return request_object.includes(key);
         });
-        return true;
+        return value;
     },
     pick : (req, arr) => {
         let final_obj = {};

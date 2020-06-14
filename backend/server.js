@@ -18,7 +18,7 @@ mongoose.connect('mongodb://0.0.0.0:27017/mynewapp', {useNewUrlParser: true,useU
 
 app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname,'../frontend/dist/frontend')))
 app.use(responseHandler);
