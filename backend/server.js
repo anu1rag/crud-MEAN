@@ -9,12 +9,7 @@ const childRoute = require('./routes/child/child.route');
 const stateRoute = require('./routes/state/state.route');
 const districtRoute = require('./routes/district/district.route'); 
 
-mongoose.connect('mongodb://0.0.0.0:27017/mynewapp', {useNewUrlParser: true,useUnifiedTopology: true}, function (err) {
-  if (err) {
-    throw err;
-  }
-  console.log('Database connected successfully');
-});
+
 
 app = express();
 app.use(bodyParser.json());
@@ -26,14 +21,21 @@ app.use('/api/child',childRoute);
 app.use('/api/state', stateRoute);
 app.use('/api/district', districtRoute);
 app.use(errorHandler);
-app.use((req,res,next)=>{
-	res.status(404).send('Unable to find the requested resource!');
+mongoose.connect('mongodb://0.0.0.0:27017/mynewapp', {useNewUrlParser: true,useUnifiedTopology: true}).then((data)=>{
+  console.log("Database successfully connected");
+}).catch((err)=>{
+    console.log(err.message);
+    console.log("Please connect database");
 });
-app.get('dist', (req,res)=>{
+
+
+app.get('*', (req,res)=>{
     res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html')) 
 });
 
-
+app.use((req,res,next)=>{
+	res.status(404).send('Unable to find the requested resource!');
+});
 
 
 app.listen(3002, ()=>{
