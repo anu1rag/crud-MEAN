@@ -1,7 +1,12 @@
+
+require('dotenv').config();
+console.log(process.env.secret);
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+
+
 const responseHandler = require('./middlewares/handlers/responseHandler');
 const errorHandler = require('./middlewares/handlers/errorHandler');
 

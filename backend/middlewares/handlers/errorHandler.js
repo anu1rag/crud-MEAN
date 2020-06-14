@@ -4,9 +4,7 @@ module.exports =  (err, req, res, next) => {
     switch (err.name) {
       case APIError.MissingParams.name:
       case APIError.InvalidParams.name:
-      case APIError.InvalidOrderStatus.name:
       case APIError.InvalidCredentials:
-      case APIError.InvalidTripStatus.name:
       case APIError.NumberAlreadyExist.name:
       case APIError.UserAlreadyExist.name:
       case APIError.DuplicateEntity.name:

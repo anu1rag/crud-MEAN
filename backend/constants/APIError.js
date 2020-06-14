@@ -31,17 +31,9 @@ module.exports = {
       name: 'ServiceNotFound',
       message: 'Requested service not found or active'
     },
-    InvalidTripStatus: {
-      name: 'InvalidTripStatus',
-      message: 'Unable to update the trip'
-    },
     InvalidToken: {
       name: 'InvalidToken',
       message: 'Provided token is invalid or expired'
-    },
-    InvalidOrderStatus: {
-      name: 'InvalidOrderStatus',
-      message: 'Order status is invalid'
     },
     InvalidCredentials: {
       name: 'InvalidCredentials',
@@ -58,5 +50,6 @@ module.exports = {
     UserAlreadyExist: {
       name: 'UserAlreadyExist',
       message: 'This user is already present. Try another one'
-    }
+    },
+    
 };
