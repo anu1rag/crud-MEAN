@@ -1,0 +1,22 @@
+
+.home-container {
+   display: grid;
+   grid-template-rows: 15% 1fr;
+   row-gap: 20px;
+   grid-template-areas:
+   'one'
+   'two';
+   width:100%;
+   height:100%;
+}
+
+
+.tooltip-container {
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    height: 100%;
+    grid-area: one;
+    justify-content: space-around;
+    align-items: center;
+}

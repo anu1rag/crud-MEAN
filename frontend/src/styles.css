@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --button-color: #274e27;
+    --primary-text: #000000;
+    --logo-text:#21ba19 ;
+    --secondary-text: #666565;
+    --background:#ffffff;
+    --border-color: #36bc36;
+}
+
+input[type=text], input[type=password] {
+    border: none;
+    border-bottom: 2px solid var(--secondary-text);
+  }
+  
+
+html,body {
+    width:100%;
+    height:100%;
+    border: none;
+}
+
+.logo {
+    border-color: var(--button-color);
+    border-radius:50%;
+    color: var(--logo-text);
+    font-size: larger;
+    border:3px solid;
+}
+
+#circle {
+    padding-top:20px;
+    padding-bottom:20px;
+    padding-right:10px;
+    padding-left:10px;
+    background:none;
+    color: var(--logo-text);
+    border:3px solid var(--border-color);
+    border-radius: 50%
+  }
+
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
