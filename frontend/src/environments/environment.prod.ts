@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url : 'https://hrtaskapi.dhwaniris.in/index.php/api/'
+  url : 'http://localhost:3002/api'
 };

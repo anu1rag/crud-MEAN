@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
 import {AuthInterceptor} from './auth/auth.interceptor';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {AuthInterceptor} from './auth/auth.interceptor';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    MainComponent
+    MainComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

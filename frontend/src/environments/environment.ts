@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url : 'https://hrtaskapi.dhwaniris.in/index.php/api'
+  url : 'http://localhost:3002/api'
 };
 
 /*

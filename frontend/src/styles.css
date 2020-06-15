@@ -4,15 +4,15 @@
     --button-color: #274e27;
     --primary-text: #000000;
     --logo-text:#21ba19 ;
-    --secondary-text: #666565;
+    --secondary-text: #2f2f2f;
     --background:#ffffff;
     --border-color: #36bc36;
 }
 
-input[type=text], input[type=password] {
+/* input[type=text] {
     border: none;
     border-bottom: 2px solid var(--secondary-text);
-  }
+  } */
   
 
 html,body {
@@ -30,14 +30,19 @@ html,body {
 }
 
 #circle {
-    padding-top:20px;
+    /* padding-top:20px;
     padding-bottom:20px;
     padding-right:10px;
-    padding-left:10px;
+    padding-left:10px; */
+    text-align: center;
+    height: 100px;
+    width: 100px;
+    padding-top:30px;
     background:none;
+    font-size: large;
     color: var(--logo-text);
     border:3px solid var(--border-color);
-    border-radius: 50%
+    border-radius: 50%;
   }
 
 

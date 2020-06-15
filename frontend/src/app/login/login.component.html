@@ -1,11 +1,16 @@
 <div [formGroup]="loginGroup" class="login-container">
     <div class="flex-container card">
-        <div class="flex-item-1">LOGO</div>
+        <div id="circle">
+            <p>LOGO</p>
+        </div>
         <div class="login">Login</div>
-        <input type="text" class="input-flex" type="text" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Username" formControlName="username">
-        <div *ngIf="!valid_user">{{message}}</div>
-        <input type="password" class="input-flex" type="password" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Password" formControlName="password">
-        <div *ngIf="!valid_user">{{message}}</div>
-        <button class="btn btn-success button-flex" [ngStyle]="{display:loginGroup.valid? 'block':'none'}" type="button" (click)="login()">Login</button>
+        <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Username" formControlName="username">
+        <div *ngIf="!valid_user" style="color:red;">{{message}}</div>
+        <input type="password" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Password" formControlName="password">
+        <div *ngIf="!valid_user" style="color:red;">{{message}}</div>
+        <div class="flex-container-2">
+            <button class="btn btn-success button-flex"  type="button" (click)="login()">Login</button>
+            <button class="btn btn-success button-flex"  type="button" (click)="register()">Register</button>
+        </div>
     </div>
 </div>

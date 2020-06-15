@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { CrudService } from '../auth/crud.service';
+
 
 @Component({
   selector: 'app-state',
@@ -8,15 +9,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StateComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: CrudService) { }
 
   ngOnInit(): void {
-    // this.http.get('https://hrtaskapi.dhwaniris.in/index.php/api/master/get-state',{
-    //   headers:{}
-    // })
-    //     .subscribe((data)=>{
-    //       console.log(data);
-    //     });
+   
   }
 
   addState() {

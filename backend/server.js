@@ -1,6 +1,5 @@
 
 require('dotenv').config();
-console.log(process.env.secret);
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -13,6 +12,7 @@ const errorHandler = require('./middlewares/handlers/errorHandler');
 const childRoute = require('./routes/child/child.route');
 const stateRoute = require('./routes/state/state.route');
 const districtRoute = require('./routes/district/district.route'); 
+const userRoute = require('./routes/user/user.route');
 
 
 
@@ -25,6 +25,7 @@ app.use(responseHandler);
 app.use('/api/child',childRoute);
 app.use('/api/state', stateRoute);
 app.use('/api/district', districtRoute);
+app.use('/api/user', userRoute);
 app.use(errorHandler);
 mongoose.connect('mongodb://0.0.0.0:27017/mynewapp', {useNewUrlParser: true,useUnifiedTopology: true}).then((data)=>{
   console.log("Database successfully connected");

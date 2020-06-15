@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CrudService } from '../auth/crud.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   loginGroup: FormGroup;
   valid_user:boolean = true;
   message = 'Username or Password is wrong';
-  constructor(private fb: FormBuilder, private http: CrudService) { }
+  constructor(private fb: FormBuilder, private http: CrudService, private router: Router) { }
 
   ngOnInit(): void {
     this.intializeForm();
@@ -26,11 +27,19 @@ export class LoginComponent implements OnInit {
   
   login(){
       this.http.getUserLogin(this.loginGroup.value).subscribe(
-        (data)=>{
+        (response: any)=>{
+          localStorage.setItem('token', response.data.token);
+          this.valid_user = true;
+          this.router.navigate(['']);
       },
       (error)=>{
-
+        console.log(error);
+        this.valid_user = false;
       })
+  }
+
+  register() {
+    this.router.navigate(['register']);
   }
 
 }
