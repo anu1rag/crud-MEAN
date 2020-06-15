@@ -1,1 +1,19 @@
-<p>district works!</p>
+<div [formGroup]="districtForm" class="state-container">
+    <div class="grid-item card">
+        <div class="flex-item-1" id="circle">+</div>
+            <div class="flex-item-2">
+                <select type="select" formControlName="state_id" placeholder="Enter State Name">
+                    <option *ngFor="let state of states" [value]="state._id">{{state.state_name}}</option>
+                </select>
+                <input type="text" formControlName="district_name" placeholder="Enter District Name">
+                <button class="btn btn-success" (click)="addDistrict()">ADD DISTRICT</button>
+            </div>
+    </div>
+    <div *ngFor="let district of districts;let i=index;" class="grid-item card">
+        <div  class="flex-item-1" id="circle">{{district.id}}</div>
+    <div class="flex-item-2">
+        <p style="font-size: x-large;">{{district.state_id.state_name}}</p>
+        <p style="font-size: x-large;">{{district.district_name}}</p>
+    </div>
+    </div>
+</div>

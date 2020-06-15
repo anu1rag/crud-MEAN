@@ -1,8 +1,6 @@
 const UserService = require('../../services/user/user.service');
-const AuthMiddleware = require('../../middlewares/auth/auth');
 const utils = require('../../utils/utils');
 const APIError = require('../../constants/APIError');
-const authMiddleware = new AuthMiddleware();
 const userService = new UserService();
 
 class UserController {
@@ -35,10 +33,29 @@ class UserController {
 
     async register(req, res, next) {
         try {
-            if(!utils.hasParams(req.body, ['username', 'password'])) {
+            if(!utils.hasParams(req.body, 
+            [ 
+            'name',
+            'username',
+            'organization',
+            'designation',
+            'password',
+            'confirm_password' 
+            ]
+            )) {
                 throw APIError.MissingParams;
             }
-            let obj = utils.pick(req.body, ['username', 'password']);
+            let obj = utils.pick(req.body, 
+                [ 
+                    'name',
+                    'username',
+                    'organization',
+                    'designation',
+                    'password',
+                    'confirm_password' 
+                ]);
+            const response = await userService.register(obj);
+            res.success(response);
         } catch(err) {
             next(err);
         }

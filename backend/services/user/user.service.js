@@ -28,8 +28,10 @@ class UserService {
         let count = await model.find({}).countDocuments();
         request.password = await bcrypt.hash(request.password, 8);
         request = {...{id : count+1}, ...request};
-        let user = new model(request);
-        let response = await user.save();
+        let register = new model(request);
+        let response = await register.save();
+        let token = await authMiddleware.createToken({username: response.username});
+        response = {...response, ...{token: token}};
         return response;
   }
 

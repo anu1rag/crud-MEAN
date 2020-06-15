@@ -6,8 +6,9 @@ const DistrictSchema = new mongoose.Schema({
         required: true
     },
     state_id : {
-        type: Number,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'State'
     },
     district_name: {
         type: String,

@@ -31,10 +31,8 @@ export class CrudService {
     return this.http.post(`${this.api}/state/create`,value);
   }
 
-  getDistrict(id) {
-    return this.http.get(`${this.api}/district/get-district`,{
-      params:{state_id: id}
-    });
+  getDistrict() {
+    return this.http.get(`${this.api}/district/get-district`);
   }
 
   postDistrict(value) {
@@ -69,6 +67,7 @@ export class CrudService {
 
   setUser(value) {
     this._user = value;
+    console.log(this._user);
   }
 
   getUser() {

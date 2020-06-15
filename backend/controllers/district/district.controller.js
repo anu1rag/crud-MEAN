@@ -9,7 +9,7 @@ class DistrictController {
 
     async getDistrict(req,res,next) {
         try {
-            let result = await districtService.getDistrict(req.query);
+            let result = await districtService.getDistrict();
             res.success(result);
         } catch(err) {
             next(err);

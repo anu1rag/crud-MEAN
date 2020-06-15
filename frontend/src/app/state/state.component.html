@@ -1,9 +1,16 @@
-<div class="state-container">
+<div [formGroup]="stateForm" class="state-container">
     <div class="grid-item card">
         <div class="flex-item-1" id="circle">+</div>
-        <div class="flex-item-2">
-            <input type="text" placeholder="Enter State Name">
-            <button class="btn btn-success" (click)="addState()">ADD STATE</button>
-        </div>
+            <div class="flex-item-2">
+                <input type="text" formControlName="state_name" placeholder="Enter State Name">
+                <button class="btn btn-success" (click)="addState()">ADD STATE</button>
+            </div>
+    </div>
+
+    <div *ngFor="let state of states" class="grid-item card">
+        <div  class="flex-item-1" id="circle">{{state.id}}</div>
+    <div class="flex-item-2">
+        <p style="font-size: x-large;">{{state.state_name}}</p>
+    </div>
     </div>
 </div>

@@ -7,12 +7,13 @@ import { CrudService } from '../auth/crud.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  data = {};
+  data:any = {};
 
   constructor(private http: CrudService) {}
 
   ngOnInit(): void {
-    this.data = this.http.getUser(); 
+    this.data = this.http.getUser();
+    console.log(this.data);
   }
 
 }

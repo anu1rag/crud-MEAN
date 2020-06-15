@@ -19,6 +19,7 @@ class StateService {
         request = {...{id : count+1},...request};
         let state = new model(request);
         let response = await state.save();
+        console.log(response);
         return response;
     }    
 }

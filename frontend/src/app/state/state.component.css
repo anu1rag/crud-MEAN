@@ -1,12 +1,16 @@
 .state-container {
     display:grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    column-gap: 10%;
+    row-gap: 10%;
     width:100%;
     height:100%;
 }
 
 .grid-item {
-    height:30%;
+    height:100%;
+    width:100%;
     border: 2px solid var(--border-color);
     justify-content: space-around;
     display:flex;

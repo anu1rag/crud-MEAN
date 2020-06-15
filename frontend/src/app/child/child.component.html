@@ -1,1 +1,33 @@
-<p>child works!</p>
+<div class="child-container">
+    <table>
+    </table>
+    <div [formGroup]="childForm" class="login-container">
+        <div class="flex-container card">
+            <div class="flex-container-1">
+                <div class="flex-item-1">
+                    <a class="previous" href="#">&laquo;</a>
+                </div>
+                <div class="flex-item-2">
+                    <p style="text-align:center;width:100%;">ADD CHILD</p>
+                </div>
+            </div>
+            <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Name" formControlName="name">
+            <select class="input-flex" type="select" formControlName="sex" placeholder="Sex">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="date" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Date of Birth" formControlName="dob">
+            <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Father's name" formControlName="father_name">
+            <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Mother's name" formControlName="mother_name">
+            <select class="input-flex" type="select" formControlName="state_id" placeholder="Enter State Name">
+                <option *ngFor="let state of states" [value]="state._id">{{state.state_name}}</option>
+            </select>
+            <select class="input-flex" type="select" formControlName="district_id" placeholder="Enter District Name">
+                <option *ngFor="let district of districts" [value]="district._id">{{district.district_name}}</option>
+            </select>
+            <input class="input-flex" type="file" name="profile" (change)="onFileSelect($event)"/>
+            <button class="btn btn-success button-flex"  type="button" (click)="submit()">SUBMIT</button>
+        </div>
+    </div>
+</div>
