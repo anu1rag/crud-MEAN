@@ -6,8 +6,10 @@ import {environment} from '../../environments/environment';
 })
 export class CrudService {
   api = environment.url;
+  _user: any;
   constructor(private http: HttpClient) { 
   }
+
 
   getUserLogin(value) {
     return this.http.post(`${this.api}/user/login`,value);
@@ -50,7 +52,7 @@ export class CrudService {
     })
   }
   postChild(value) {
-    return this.http.post(`${this.api}/beneficiary/child-profile-create`,value);
+    return this.http.post(`${this.api}/child/create`,value);
   }
 
   postFile() {
@@ -59,6 +61,18 @@ export class CrudService {
 
   changeFile() {
     
+  }
+
+  registerUser(value) {
+    return this.http.post(`${this.api}/user/register`,value);
+  }
+
+  setUser(value) {
+    this._user = value;
+  }
+
+  getUser() {
+    return this._user;
   }
 
 }

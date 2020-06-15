@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CrudService } from '../auth/crud.service';
 
 @Component({
   selector: 'app-home',
@@ -6,14 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  data = {
-    name: 'Ramesh Prakash',
-    organization: 'Bal Vikas',
-    designation : 'Cluster Coordinator'
-  }
-  constructor() {}
+  data = {};
+
+  constructor(private http: CrudService) {}
 
   ngOnInit(): void {
+    this.data = this.http.getUser(); 
   }
 
 }

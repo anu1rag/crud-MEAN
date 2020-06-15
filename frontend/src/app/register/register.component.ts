@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CrudService } from '../auth/crud.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   valid_user: boolean = true;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private http: CrudService, private router: Router) { }
   ngOnInit(): void {
     this.initializeForm();
   }
@@ -27,6 +29,14 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    
+    this.http.registerUser(this.registerForm.value).subscribe(
+      (response: any)=>{
+        localStorage.setItem('token', response.data.token);
+        this.http.setUser(response.data);
+        this.router.navigate(['']);
+    },
+    (err)=>{
+      
+    });
   }
 }
