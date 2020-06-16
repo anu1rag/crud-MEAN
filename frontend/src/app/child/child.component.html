@@ -67,7 +67,7 @@
     </div>
 
     <div *ngIf="childProfile" class="child-full-view card">
-        <a style="display:inline;" class="previous" (click)="full_view_end()">&laquo;</a>
+        <a  class="previous previous-image" (click)="full_view_end()">&laquo;</a>
         <td><img class="image-profiler" src="{{environment.url + '/' + childProfile.photo}}"/></td>
         <td>Name: {{childProfile.name}}</td>
         <td>Sex: {{childProfile.sex}}</td>
