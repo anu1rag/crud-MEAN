@@ -39,12 +39,9 @@ export class CrudService {
     return this.http.post(`${this.api}/district/create`,value);
   }
 
-  getChild(limit, pages) {
-    return this.http.get(`${this.api}/child/get-all-child`, {
-      params : {
-        limit: limit,
-        pages: pages
-      }
+  getChild(value) {
+    return this.http.get<any[]>(`${this.api}/child/get-all-child`, {
+      params :value
     });
   }
   getChildByDistrict(district_id) {

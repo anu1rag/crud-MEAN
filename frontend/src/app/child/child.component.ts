@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CrudService } from '../auth/crud.service';
 import { Observable } from 'rxjs';
+import {environment} from '../../environments/environment';
 
 
 @Component({
@@ -12,14 +13,26 @@ import { Observable } from 'rxjs';
 export class ChildComponent implements OnInit {
   
   childForm: FormGroup;
+  tableForm: FormGroup;
   valid_user: boolean;
   states$: Observable<any[]>
   district$: Observable<any[]>
+  childArray$: Observable<any[]>;
+  table_keys:any[] = ['Name', 'Sex', 'DOB', "Father name", "Mother name", "State", "District"]
+  child_keys: any[] = [];
+  pageLimitArray: number[];
+  childProfile:any;
+  table_view: boolean = true;
+  environment = environment;
   constructor(private fb: FormBuilder, private http: CrudService) { }
 
   ngOnInit(): void {
     this.getStates();
+    this.initializeTableForm();
     this.initializeForm();
+    this.pageLimitArray = Array(10).fill(1).map((x,i)=>i+1);
+    this.setLimit();
+    this.child_keys = Object.keys(this.childForm.value);
     
   }
 
@@ -35,6 +48,13 @@ export class ChildComponent implements OnInit {
       photo: ''
     });
     
+  }
+
+  initializeTableForm() {
+    this.tableForm = this.fb.group({
+      limit: 10,
+      pages: 0
+    })
   }
 
 
@@ -63,6 +83,23 @@ export class ChildComponent implements OnInit {
 
   getStates() {
     this.states$ =  this.http.getState();
+  }
+
+  setLimit() {
+    this.childArray$ = this.http.getChild(this.tableForm.value);
+  }
+
+  full_view(value) {
+     this.childProfile = value;
+  }
+
+  full_view_end() {
+    this.childProfile = null;
+  }
+
+  removeTableView() {
+    this.table_view = this.table_view ? false : true;
+    console.log(this.table_view);
   }
 
 }

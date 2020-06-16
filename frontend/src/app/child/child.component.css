@@ -81,3 +81,42 @@ a {
     color: black;
     text-align: center;
   }
+
+
+  .flex-table-item {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height:100%;
+      justify-content: space-around;
+  }
+
+  .flex-add-child {
+      display: flex;
+      width:100%;
+      flex-direction: row;
+      justify-content: flex-end;
+  }
+
+  .flex-table {
+      width:100%;
+      height:60%;
+  }
+
+  .flex-table-metadata {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+  }
+
+  .child-full-view {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 20%;
+      column-gap: 20%;
+      height: 100%;
+  }
+
+  .image-profiler {
+      
+  }

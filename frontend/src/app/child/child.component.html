@@ -1,33 +1,79 @@
 <div class="child-container">
-    <table>
-    </table>
-    <div [formGroup]="childForm" class="login-container">
-        <div class="flex-container card">
-            <div class="flex-container-1">
-                <div class="flex-item-1">
-                    <a class="previous" href="#">&laquo;</a>
-                </div>
-                <div class="flex-item-2">
-                    <p style="text-align:center;width:100%;">ADD CHILD</p>
+    <div  [ngStyle]="{'display': childProfile && table_view == true? 'none': 'block'}"  [ngStyle]="{'display': table_view == true? 'block': 'none'}" [formGroup]="tableForm" class="flex-table-item">
+        <div class="flex-add-child">
+            <button class="btn btn-success" (click)="removeTableView()">Add Child</button>
+        </div>
+        <div class="flex-table card">
+            <div class="flex-table-metadata">
+                <p>Showing 1-1 out of 1 entries</p>
+                <div style="width:10%;">
+                    <p style="display: inline;">Items per page</p>
+                    <select formControlName="limit" (change)="setLimit()">
+                        <option *ngFor="let i of pageLimitArray" >{{i}}</option>
+                    </select>
                 </div>
             </div>
-            <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Name" formControlName="name">
-            <select class="input-flex" type="select" formControlName="sex" placeholder="Sex">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-            <input type="date" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Date of Birth" formControlName="dob">
-            <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Father's name" formControlName="father_name">
-            <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Mother's name" formControlName="mother_name">
-            <select class="input-flex" (change)="getDistrict()" formControlName="state_id" placeholder="Enter State Name">
-                <option *ngFor="let state of (states$ | async)?.data" [value]="state._id"></option>
-            </select>
-            <select class="input-flex" formControlName="district_id" placeholder="Enter District Name">
-                <option *ngFor="let district of (district$ | async)?.data" [value]="district._id"></option>
-            </select>
-            <input class="input-flex" type="file" name="profile" (change)="onFileSelect($event)"/>
-            <button class="btn btn-success button-flex"  type="button" (click)="submit()">SUBMIT</button>
+            <table style="width:100%;height:100%;">
+                <thead>
+                    <tr>
+                        <td *ngFor="let col of table_keys">{{col}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let childCol of (childArray$ | async)?.data">
+                        <td>{{childCol.name}}</td>
+                        <td>{{childCol.sex}}</td>
+                        <td>{{childCol.dob}}</td>
+                        <td>{{childCol.father_name}}</td>
+                        <td>{{childCol.mother_name}}</td>
+                        <td>{{childCol.district_id.state_id.state_name}}</td>
+                        <td>{{childCol.district_id.district_name}}</td>
+                        <td><button class="btn btn-outline" (click)="full_view(childCol)">View</button></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <div  [ngStyle] = "{'display': table_view == true? 'none': 'block'}" [formGroup]="childForm" class="login-container">
+            <div class="flex-container card">
+                <div class="flex-container-1">
+                    <div class="flex-item-1">
+                        <a class="previous" (click)="removeTableView()">&laquo;</a>
+                    </div>
+                    <div class="flex-item-2">
+                        <p style="text-align:center;width:100%;">ADD CHILD</p>
+                    </div>
+                </div>
+                <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Name" formControlName="name">
+                <select class="input-flex" type="select" formControlName="sex" placeholder="Sex">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input type="date" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Date of Birth" formControlName="dob">
+                <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Father's name" formControlName="father_name">
+                <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Mother's name" formControlName="mother_name">
+                <select class="input-flex" (change)="getDistrict()" formControlName="state_id" placeholder="Enter State Name">
+                    <option *ngFor="let state of (states$ | async)?.data" [value]="state._id"></option>
+                </select>
+                <select class="input-flex" formControlName="district_id" placeholder="Enter District Name">
+                    <option *ngFor="let district of (district$ | async)?.data" [value]="district._id"></option>
+                </select>
+                <input class="input-flex" type="file" name="profile" (change)="onFileSelect($event)"/>
+                <button  class="btn btn-success button-flex"  type="button" (click)="submit()">SUBMIT</button>
+            </div>
         </div>
     </div>
-</div>
+
+    <div *ngIf="childProfile" class="child-full-view card">
+        <a style="display:inline;" class="previous" (click)="full_view_end()">&laquo;</a>
+        <td><img class="image-profiler" src="{{environment.url + '/' + childProfile.photo}}"/></td>
+        <td>Name: {{childProfile.name}}</td>
+        <td>Sex: {{childProfile.sex}}</td>
+        <td>DOB: {{childProfile.dob}}</td>
+        <td>Father_name: {{childProfile.father_name}}</td>
+        <td>Mother_name: {{childProfile.mother_name}}</td>
+        <td>State_name: {{childProfile.district_id.state_id.state_name}}</td>
+        <td>District_name: {{childProfile.district_id.district_name}}</td>
+    </div>

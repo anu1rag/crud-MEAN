@@ -11,7 +11,10 @@ class ChildService {
         } else {
             pages = +request.pages-1
         }
-        let data = await model.find({}).limit(+request.limit).skip(pages).exec();
+        let data = await model.find({}).populate({
+            path: 'district_id',
+            populate: {path:'state_id'}
+        }).limit(+request.limit).skip(pages).exec();
         return data;
     }
 
