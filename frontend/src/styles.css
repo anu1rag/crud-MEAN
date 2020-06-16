@@ -35,9 +35,9 @@ html,body {
     padding-right:10px;
     padding-left:10px; */
     text-align: center;
-    height: 100px;
-    width: 100px;
-    padding-top:30px;
+    height: max-content;
+    width: max-content;
+    padding:20px;
     background:none;
     font-size: large;
     color: var(--logo-text);
