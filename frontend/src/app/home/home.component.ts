@@ -12,8 +12,9 @@ export class HomeComponent implements OnInit {
   constructor(private http: CrudService) {}
 
   ngOnInit(): void {
-    this.data = this.http.getUser();
-    console.log(this.data);
+    this.http.getUserByToken(localStorage.getItem('token')).subscribe((response:any)=>{
+      this.data = response.data;
+    });
   }
 
 }

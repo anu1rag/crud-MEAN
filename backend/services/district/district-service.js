@@ -10,6 +10,11 @@ class DistrictService {
         return data;
     }
 
+    async getDistrictByState(value) {
+        let data = await model.find(value);
+        return data;
+    }
+
     async createDistrict(request) {
         let district_name = await model.findOne({state_id: request.state_id, district_name:request.district_name});
         if(district_name) {

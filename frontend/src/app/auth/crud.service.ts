@@ -24,7 +24,7 @@ export class CrudService {
   }
 
   getState() {
-    return this.http.get(`${this.api}/state/get-state`);
+    return this.http.get<any[]>(`${this.api}/state/get-state`);
   }
 
   postState(value) {
@@ -39,8 +39,13 @@ export class CrudService {
     return this.http.post(`${this.api}/district/create`,value);
   }
 
-  getChild() {
-    return this.http.get(`${this.api}/child/get-all-child`);
+  getChild(limit, pages) {
+    return this.http.get(`${this.api}/child/get-all-child`, {
+      params : {
+        limit: limit,
+        pages: pages
+      }
+    });
   }
   getChildByDistrict(district_id) {
     return this.http.get(`${this.api}/child/get-child-by-district`,{
@@ -49,16 +54,18 @@ export class CrudService {
       }
     })
   }
+
+  getDistrictByState(state_id) {
+    console.log(state_id);
+    return this.http.get<any[]>(`${this.api}/district/get-district-by-state`,{
+      params: {
+        state_id : state_id
+      }
+    })
+  }
+
   postChild(value) {
     return this.http.post(`${this.api}/child/create`,value);
-  }
-
-  postFile() {
-
-  }
-
-  changeFile() {
-    
   }
 
   registerUser(value) {
@@ -73,5 +80,14 @@ export class CrudService {
   getUser() {
     return this._user;
   }
+
+  getUserByToken(token) {
+    return this.http.get(`${this.api}/user/get-user-by-token`,{
+      params: {
+        token : token
+      }
+    })
+  }
+
 
 }

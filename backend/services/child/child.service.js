@@ -4,28 +4,28 @@ class ChildService {
     constructor() {
     }
 
-    async getAllChild() {
-        let data = await model.find({});
+    async getAllChild(request) {
+        let pages = 0;
+        if(request.pages<0 || request.pages == 0) {
+            pages = 0;
+        } else {
+            pages = +request.pages-1
+        }
+        let data = await model.find({}).limit(+request.limit).skip(pages).exec();
         return data;
-        try{
-
-           
-        }
-        catch(err){
-            return err;
-        }
     }
 
     async getChildByDistrict(request) {
-        let data = await model.find({district_id: +request.district_id});
+        let data = await model.find({district_id: request.district_id});
         return data;
     }
 
     async createChild(request) {
-        let count = await model.find({district_id: +request.district_id}).count();
-        request = {...{id:count+1},...request};
-        let data = model.create(request);
-        let response = await data.save(request);
+        
+        let count = await model.find({}).countDocuments();
+        request = {...{id : count+1},...request};
+        let child = new model(request);
+        let response = await child.save();
         return response;
     }    
 }

@@ -16,6 +16,15 @@ class DistrictController {
         }
     }
 
+    async getDistrictByState(req,res,next) {
+        try {
+            let result = await districtService.getDistrictByState(req.query);
+            res.success(result);
+        } catch(err) {
+            next(err);
+        }
+    }
+
     async createDistrict(req,res,next) {
         try {
             if(!utils.hasParams(req.body, ['state_id', 'district_name'])) {

@@ -8,6 +8,15 @@ class UserController {
 
     }
 
+    async get_user(req, res, next) {
+        try {
+            let response = await userService.get_user(req.query.user_id);
+            res.success(response);
+        } catch(err) {
+            next(err);
+        }
+    }
+
     async login(req, res, next) {
         try {
             if(!utils.hasParams(req.body, ['username', 'password'])) {
@@ -22,6 +31,20 @@ class UserController {
 
 
     }
+
+    async getUserByToken(req, res, next) {
+        try {
+            if(!utils.hasParams(req.query, ['token'])) {
+                throw APIError.MissingParams;
+            }
+            let obj = utils.pick(req.query, ['token']);
+            const user = await userService.getUserByToken(req.query.token);
+            res.success(user);
+        } catch(err) {
+            next(err);
+        }
+    }
+
 
     async logout(req, res, next) {
         try {

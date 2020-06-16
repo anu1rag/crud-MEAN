@@ -1,6 +1,7 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CrudService } from '../auth/crud.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -8,19 +9,17 @@ import { CrudService } from '../auth/crud.service';
   templateUrl: './child.component.html',
   styleUrls: ['./child.component.css']
 })
-export class ChildComponent implements OnInit, OnChanges {
+export class ChildComponent implements OnInit {
   
   childForm: FormGroup;
   valid_user: boolean;
-  districts = [];
-  states = [];
-  filter_district = [];
+  states$: Observable<any[]>
+  district$: Observable<any[]>
   constructor(private fb: FormBuilder, private http: CrudService) { }
 
   ngOnInit(): void {
-  }
-
-  ngOnChanges() {
+    this.getStates();
+    this.initializeForm();
     
   }
 
@@ -40,29 +39,30 @@ export class ChildComponent implements OnInit, OnChanges {
 
 
   submit() {
-    console.log(this.childForm.value);
+    console.log(this.childForm);
+    const uploadData = new FormData();
+    for(let key of Object.keys(this.childForm.value)) {
+      uploadData.append(key,this.childForm.value[key]);
+    }
+    this.http.postChild(uploadData).subscribe((response)=>{
+      console.log(response);
+    });
   }
 
   onFileSelect(event) {
-
+    console.log(event.target);
+    console.log(event.target.files);
+    console.log(event.target.file);
+    this.childForm.get('photo').setValue(event.target.files[0]);
   }
 
   getDistrict() {
-    this.http.getDistrict().subscribe((response:any)=>{
-      this.districts = response.data;
-    },
-    (err)=>{
-
-    })
+    let value = this.childForm.value.state_id;
+    this.district$=  this.http.getDistrictByState(value)
   }
 
   getStates() {
-    this.http.getState().subscribe((response: any)=>{
-      this.states = response.data;
-    },
-    (err)=>{
-
-    })
+    this.states$ =  this.http.getState();
   }
 
 }

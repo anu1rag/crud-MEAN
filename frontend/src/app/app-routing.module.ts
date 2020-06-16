@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: '', 
   component: MainComponent,
+  canActivate: [AuthGuard],
   children:[
     { path: '', component: HomeComponent },
     { path: 'state', loadChildren: () => import('./state/state.module').then(m => m.StateModule) }, 

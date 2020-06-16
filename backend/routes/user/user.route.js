@@ -7,5 +7,6 @@ const userController = new UserController();
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.post('/register', userController.register);
+router.get('/get-user-by-token', userController.getUserByToken);
 
 module.exports = router;

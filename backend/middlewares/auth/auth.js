@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const parseToken = require('jwt-decode');
 const APIError = require('../../constants/APIError');
 
 class AuthMiddleware {
@@ -29,6 +30,11 @@ class AuthMiddleware {
             next(err);
         }
         
+    }
+
+    async parseToken(token) {
+        let payload = await parseToken(token);
+        return payload;
     }
 }
 

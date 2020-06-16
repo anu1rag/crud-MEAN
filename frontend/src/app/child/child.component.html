@@ -20,11 +20,11 @@
             <input type="date" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Date of Birth" formControlName="dob">
             <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Father's name" formControlName="father_name">
             <input type="text" class="input-flex" [ngStyle]="{'border-bottom': valid_user? 'green':'red'}" placeholder="Mother's name" formControlName="mother_name">
-            <select class="input-flex" type="select" formControlName="state_id" placeholder="Enter State Name">
-                <option *ngFor="let state of states" [value]="state._id">{{state.state_name}}</option>
+            <select class="input-flex" (change)="getDistrict()" formControlName="state_id" placeholder="Enter State Name">
+                <option *ngFor="let state of (states$ | async)?.data" [value]="state._id"></option>
             </select>
-            <select class="input-flex" type="select" formControlName="district_id" placeholder="Enter District Name">
-                <option *ngFor="let district of districts" [value]="district._id">{{district.district_name}}</option>
+            <select class="input-flex" formControlName="district_id" placeholder="Enter District Name">
+                <option *ngFor="let district of (district$ | async)?.data" [value]="district._id"></option>
             </select>
             <input class="input-flex" type="file" name="profile" (change)="onFileSelect($event)"/>
             <button class="btn btn-success button-flex"  type="button" (click)="submit()">SUBMIT</button>

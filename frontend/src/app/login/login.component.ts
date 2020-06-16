@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
   login(){
       this.http.getUserLogin(this.loginGroup.value).subscribe(
         (response: any)=>{
-          localStorage.setItem('token', response.data.token);
+          console.log(response);
+          localStorage.setItem('token', response.data);
+          console.log(localStorage.getItem('token'));
           this.valid_user = true;
           this.router.navigate(['']);
       },

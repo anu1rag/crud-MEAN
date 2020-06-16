@@ -19,8 +19,9 @@ const userRoute = require('./routes/user/user.route');
 app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname,'../frontend/dist/frontend')))
+// app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname,'../frontend/dist/frontend')));
 app.use(responseHandler);
 app.use('/api/child',childRoute);
 app.use('/api/state', stateRoute);
