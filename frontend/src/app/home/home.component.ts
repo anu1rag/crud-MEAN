@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.http.getUserByToken(localStorage.getItem('token')).subscribe((response:any)=>{
       this.data = response.data;
+      console.log(this.data);
     });
   }
 

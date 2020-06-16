@@ -37,7 +37,7 @@ class UserService {
         let response = await registeration.save();
 
         console.log(response);
-        let token = await authMiddleware.createToken({username: response._id});
+        let token = await authMiddleware.createToken({username: request.username});
         console.log(token);
         return token;
   }
