@@ -37,7 +37,7 @@ html,body {
     text-align: center;
     height: max-content;
     width: max-content;
-    padding:20px;
+    padding:2%;
     background:none;
     font-size: large;
     color: var(--logo-text);
